@@ -23,7 +23,7 @@ class ProductManager {
     if (product) {
       return product;
     } else {
-      console.log("Product not found");
+      console.log("Product not found!");
       return {};
     }
   }
@@ -80,7 +80,7 @@ class ProductManager {
           console.log(error);
         }
       } else {
-        console.log("Product not found");
+        console.log("Product not found!");
       }
     } catch (error) {
       console.log(error);
@@ -98,10 +98,10 @@ class ProductManager {
           await fs.promises.writeFile(this.path, JSON.stringify(productosFile));
           console.log("Product deleted", productosFile);
         } else {
-          console.log("El producto no existe");
+          console.log("Product not found!");
         }
       } else {
-        console.log("El archivo no existe");
+        console.log("File not found!");
       }
     } catch (error) {
       console.log(error);
@@ -119,13 +119,6 @@ class ProductManager {
 }
 
 const productManager1 = new ProductManager("./Products.json");
-/* console.log(productManager1.getProducts());
-productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-console.log(productManager1.getProducts());
-productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-
-productManager1.getProductById(2);
-productManager1.getProductById(1); */
 
 const producto1 = {
   title: "producto Añadido",
