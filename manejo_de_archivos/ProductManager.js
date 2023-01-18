@@ -64,11 +64,16 @@ class ProductManager {
   async updateProduct(id, product) {
     try {
       const productosFile = this.getProducts();
-      const productIndex = productosFile.findIndex((producto) => producto.id === id);
+      const productIndex = productosFile.findIndex(
+        (producto) => producto.id === id
+      );
 
       if (productIndex >= 0) {
         try {
-          productosFile[productIndex] = { ...productosFile[productIndex], ...product };
+          productosFile[productIndex] = {
+            ...productosFile[productIndex],
+            ...product,
+          };
           await fs.promises.writeFile(this.path, JSON.stringify(productosFile));
           console.log("Product updated");
         } catch (error) {
@@ -76,9 +81,28 @@ class ProductManager {
         }
       } else {
         console.log("Product not found");
-
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+  async deleteProduct(id) {
+    try {
+      const productosFile = this.getProducts();
+      if (productosFile) {
+        const productIndex = productosFile.findIndex((p) => p.id === id);
+        if (productIndex >= 0) {
+          productosFile.splice(productIndex, 1);
+
+          await fs.promises.writeFile(this.path, JSON.stringify(productosFile));
+          console.log("Product deleted", productosFile);
+        } else {
+          console.log("El producto no existe");
+        }
+      } else {
+        console.log("El archivo no existe");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -123,11 +147,19 @@ async function prueba() {
   const productById = productManager1.getProductById(1);
   console.log("PRODUCT BY ID (1):", productById);
 
-  await productManager1.updateProduct(1, {title: "producto actualizado", description: "descripcion actualizada", price: 1, code: "a", stock: 0});
+  await productManager1.updateProduct(3, {
+    title: "producto actualizado",
+    description: "descripcion actualizada",
+    price: 1,
+    code: "a",
+    stock: 0,
+  });
   const consultaProductos3 = productManager1.getProducts();
   console.log("After update", consultaProductos3);
-  //await manager.crearUsuario(usuario2)
-  //manager.updateUsuarios(1,{nombre:'Ernesto'})
+
+  await productManager1.deleteProduct(2);
+  const consultaProductos4 = productManager1.getProducts();
+  console.log("After delete", consultaProductos4);
 }
 
 prueba();
