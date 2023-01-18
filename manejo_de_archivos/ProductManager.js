@@ -6,7 +6,7 @@ class ProductManager {
     this.path = path;
   }
 
-  consultarProductos() {
+  getProducts() {
     if (fs.existsSync(this.path)) {
       const productos = fs.readFileSync(this.path, "utf-8");
       const productosJS = JSON.parse(productos);
@@ -17,7 +17,7 @@ class ProductManager {
   }
 
   getProductById(productId) {
-    const productosFile = this.consultarProductos();
+    const productosFile = this.getProducts();
     const product = productosFile.find((product) => product.id === productId);
 
     if (product) {
@@ -28,7 +28,7 @@ class ProductManager {
     }
   }
 
-  async crearProducto(producto) {
+  async addProduct(producto) {
     if (
       !producto.title ||
       !producto.description ||
@@ -39,7 +39,7 @@ class ProductManager {
     ) {
       console.log("There's a mising field!");
     } else {
-      const productosFile = this.consultarProductos();
+      const productosFile = this.getProducts();
       const productByCode = productosFile.find(
         (product) => product.code === producto.code
       );
@@ -63,21 +63,22 @@ class ProductManager {
 
   async updateProduct(id, product) {
     try {
-      const productById = this.getProductById(id);
-      if (productById) {
-        const products = this.consultarProductos();
+      const productosFile = this.getProducts();
+      const productIndex = productosFile.findIndex((producto) => producto.id === id);
+
+      if (productIndex >= 0) {
+        try {
+          productosFile[productIndex] = { ...productosFile[productIndex], ...product };
+          await fs.promises.writeFile(this.path, JSON.stringify(productosFile));
+          console.log("Product updated");
+        } catch (error) {
+          console.log(error);
+        }
       } else {
-        console.log("Product not found!");
+        console.log("Product not found");
+
       }
-      
-      const index = products.findIndex((p) => p.id === id);
-      if (index >= 0) {
-        products[index] = { ...products[index], ...product };
-        await fs.writeFileSync(this.path, JSON.stringify(products, null, "\t"));
-        console.log("Producto actualizado");
-      } else {
-        throw new Error("El producto no existe");
-      }
+
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +86,7 @@ class ProductManager {
 
   #generarId() {
     let id = 1;
-    const productosFile = this.consultarProductos();
+    const productosFile = this.getProducts();
     if (productosFile.length !== 0) {
       id = productosFile[productosFile.length - 1].id + 1;
     }
@@ -112,15 +113,19 @@ const producto1 = {
 };
 
 async function prueba() {
-  const consultaProductos1 = productManager1.consultarProductos();
+  const consultaProductos1 = productManager1.getProducts();
   console.log(consultaProductos1);
 
-  await productManager1.crearProducto(producto1);
-  const consultaProductos2 = productManager1.consultarProductos();
-  console.log(consultaProductos2);
+  await productManager1.addProduct(producto1);
+  const consultaProductos2 = productManager1.getProducts();
+  console.log("After add", consultaProductos2);
 
   const productById = productManager1.getProductById(1);
   console.log("PRODUCT BY ID (1):", productById);
+
+  await productManager1.updateProduct(1, {title: "producto actualizado", description: "descripcion actualizada", price: 1, code: "a", stock: 0});
+  const consultaProductos3 = productManager1.getProducts();
+  console.log("After update", consultaProductos3);
   //await manager.crearUsuario(usuario2)
   //manager.updateUsuarios(1,{nombre:'Ernesto'})
 }
