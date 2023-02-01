@@ -59,10 +59,17 @@ class CartManager {
         if (productIndex >= 0) {
           try {
             let newProductsArray = [...cartsFile[cartIndex].products];
-            newProductsArray.push({
-              product: productId,
-              quantity: 1
-            })
+            const productFoundIndex = newProductsArray.findIndex((p) => p.product === productId);
+            console.log({productFoundIndex});
+            if (productFoundIndex >= 0) {
+              newProductsArray[productFoundIndex].quantity++;
+            } else{
+              newProductsArray.push({
+                product: productId,
+                quantity: 1
+              })
+            }
+            
             cartsFile[cartIndex] = {
               ...cartsFile[cartIndex],
               products: newProductsArray,
