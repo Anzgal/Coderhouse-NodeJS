@@ -59,7 +59,7 @@ class CartManager {
         if (productIndex >= 0) {
           try {
             let newProductsArray = [...cartsFile[cartIndex].products];
-            productsArray.push({
+            newProductsArray.push({
               product: productId,
               quantity: 1
             })
