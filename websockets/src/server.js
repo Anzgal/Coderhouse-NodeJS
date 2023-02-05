@@ -24,7 +24,7 @@ app.get("/home", (req, res) => {
   res.render("home");
 });
 
-app.get("/realtime", (req, res) => {
+app.get("/realTimeProducts", (req, res) => {
   res.render("realTimeProducts");
 });
 
