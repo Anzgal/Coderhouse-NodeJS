@@ -1,0 +1,14 @@
+<h3>Real time</h3>
+<form id="formulario">
+    Título: <input required="true" type="text" name="title" id="title"><br>
+    Descripción: <input required="true" type="text" name="description" id="description"><br>
+    Thumbnails: <input type="text" name="thumbnails" id="thumbnails"><br>
+    Categoría: <input type="text" name="category" id="category"><br>
+    Precio: <input required="true" type="number" min="0" step="1" name="price" id="price"><br>
+    Código: <input required="true" type="text" name="code" id="code"><br>
+    Stock: <input required="true" type="number" min="0" step="1" name="stock" id="stock"><br>
+    <input type="submit" value="ENVIAR">
+</form>
+<p id="parrafoMensajes"></p>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/realtime.js"></script>
