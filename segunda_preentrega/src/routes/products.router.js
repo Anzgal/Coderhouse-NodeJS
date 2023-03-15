@@ -7,52 +7,41 @@ const router = Router();
 const productManager = new ProductManager();
 
 router.get("/", async (req, res) => {
-  const { limit, page, sort, category } = req.query;
+  let {limit=10, page=1,sort,query} =req.query;
+  
+  query ? query = {category:query} : null
+  
+  const options = {
+      limit,
+      page,        
+  }
+  sort ? options.sort = {price:sort} : options
 
-  const products = await productsModel.paginate(
-    category ? { category: category } : null,
-    { limit, page, sort: { price: sort || 1 } }
-  );
-
+  const products = await productsModel.paginate(query,options);
   const status = products.docs ? "success" : "error";
-  const prevLink = products.hasPrevPage
-    ? `http://localhost:3000/api/products?page=${products.prevPage}`
-    : null;
-  const nextLink = products.hasNextPage
-    ? `http://localhost:3000/api/products?page=${products.nextPage}`
-    : null;
+  const prevLink = products.hasPrevPage ? `http://localhost:8080/api/products?page=${products.prevPage}` : null;
+  const nextLink = products.hasNextPage ? `http://localhost:8080/api/products?page=${products.nextPage}` : null;
+  
+  res.json({results:{
+      status,
+      payload: products.docs,
+      totalPages: products.totalPages,
+      prevPage: products.prevPage,
+      nextPage: products.nextPage,
+      page: products.page,
+      hasPrevPage: products.hasPrevPage,
+      hasNextPage: products.hasNextPage,
+      prevLink,
+      nextLink
+  }})
+})
 
-    res.json({results:{
-        status,
-        payload: products.docs,
-        totalPages: products.totalPages,
-        prevPage: products.prevPage,
-        nextPage: products.nextPage,
-        page: products.page,
-        hasPrevPage: products.hasPrevPage,
-        hasNextPage: products.hasNextPage,
-        prevLink,
-        nextLink
-    }})
-
-/*   const products = await productManager.getProducts({ limit, page });
-  if (products.length === 0) {
-    res.json({ message: "No hay productos listados" });
-  } else {
-    const next = products.hasNextPage
-      ? `http://localhost:3000/api/products?limit=${products.limit}&page=${products.nextPage}`
-      : null;
-    const prev = products.hasPrevPage
-      ? `http://localhost:3000/api/products?limit=${products.limit}&page=${products.prevPage}`
-      : null;
-    res.json({
-      message: "Listado de productos: ",
-      products: products.docs,
-      PrevPág: prev,
-      PróxPág: next,
-    });
-  } */
-});
+router.get("/aggregation/:category", async(req,res) => {
+  const {category} = req.params;
+  const {sort = 1} = req.query;
+  const productsFiltered = await productManager.aggregationFunc(category, parseInt(sort));
+  res.json({productsFiltered});
+})
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;

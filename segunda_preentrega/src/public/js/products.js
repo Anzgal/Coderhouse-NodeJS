@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     fetch("/api/products", options)
         .then((res) => res.json())
         .then((response) => {
-            // console.log(response.results.payload);
             const products = response.results.payload;
             const table = document.querySelector("#productsTable");
             const productsTableBody = table.querySelector("tbody");
@@ -31,7 +30,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const thumbnailCell = document.createElement("td");
                 const addToCartButton = document.createElement("td");
 
-                //valores de cada celda
                 titleCell.textContent = product.title;
                 descriptionCell.textContent = product.description;
                 codeCell.textContent = product.code;
@@ -42,7 +40,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 thumbnailCell.textContent = product.thumbnail;
                 addToCartButton.innerHTML = `<button class="addToCart" id=${product._id}>Agregar</button>`;
 
-                //append para agregar cada row
                 row.appendChild(titleCell);
                 row.appendChild(descriptionCell);
                 row.appendChild(codeCell);
@@ -53,19 +50,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 row.appendChild(thumbnailCell);
                 row.appendChild(addToCartButton);
 
-                //agregar cada row al body de la tabla
                 productsTableBody.appendChild(row);
             });
 
-            //traigo los botones creados, para despues agregarle una funcion
             let addToCart = document.querySelectorAll(".addToCart");
            
 
             addToCart.forEach((button) => {
                 const productId = button.id
                 button.addEventListener("click", async () => {                    
-                    //agregar producto al carrito con fetch
-                    const productAdded = await fetch(`/api/carts/${cartId}/product/${productId}`,{method:"POST"});
+                    await fetch(`/api/carts/${cartId}/product/${productId}`,{method:"POST"});
                     alert("Producto añadido al carrito")
 
                     
