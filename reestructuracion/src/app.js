@@ -16,10 +16,10 @@ import sessionRouter from "./routes/session.router.js";
 import userRouter from "./routes/user.router.js";
 import jwtRouter from "./routes/jwt.router.js";
 
-import ProductManager from "./dao/mongoManager/productsManager.js.js.js";
-import MessagesManager from "./dao/mongoManager/messagesManager.js.js.js";
+import ProductManager from "./dao/mongoManager/productsManager.js";
+import MessagesManager from "./dao/mongoManager/messagesManager.js";
 
-import "./dao/dbConfig.js.js.js";
+import "./dao/dbConfig.js";
 import "./passport/passportStrategies.js";
 
 const app = express();
