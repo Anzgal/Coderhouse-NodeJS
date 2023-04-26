@@ -40,7 +40,7 @@ passport.use(
     async (req, email, password, done) => {
       try {
         const correctUser = await usersModel.findOne({ email });
-        if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
           correctUser.rol = "Admin";
           correctUser.save();
           return done(null, correctUser);
