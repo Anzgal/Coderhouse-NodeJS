@@ -1,24 +1,10 @@
- <h3>Hola {{first_name}} {{last_name}} tu rol es: {{rol}}</h3>
+ <h3>Hola {{userData.first_name}} {{userData.last_name}} tu rol es: {{userData.rol}}</h3>
  <button id="logOut">Cerrar Sesion</button>
  <button class="cartButton"><a id="linkToCart" href="/home">IR AL CARRITO</a> </button>
  
- <table id="productsTable">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>Codigo</th>
-          <th>Status</th>
-          <th>Stock</th>
-          <th>Categoria</th>
-          <th>Precio</th>
-          <th>Imagen</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
+<div id="card-render" style="display:flex;flex-wrap: wrap; justify-content: space-around;  row-gap: 20px;">
+    <div class="custom-loader"></div>
+</div>
 
 <script src="/socket.io/socket.io.js"></script>
 
