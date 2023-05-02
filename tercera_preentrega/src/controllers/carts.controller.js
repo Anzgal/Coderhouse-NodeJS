@@ -20,8 +20,7 @@ export const cartById = async (req, res) => {
 		const { cid } = req.params;
 		const cart = await getCartbyId(cid);
 		if (cart) {
-			const cartProducts = cart[0].products;
-			res.render("cart", { cartProducts });
+			res.json(cart);
 		} else {
 			res.json({ mensaje: "Cart not found" });
 		}

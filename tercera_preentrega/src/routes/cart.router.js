@@ -11,12 +11,22 @@ import {
 	deleteProductFromCart,
 	deleteAll,
 } from "../controllers/carts.controller.js";
+import { getTicket } from "../services/ticket.service.js";
+import { stockVerification } from "../middlewares/stockVerification.js";
+import { purchaseGenerator } from "../controllers/tickets.controller.js";
 
 const router = Router();
 
 router.get("/", getAllCarts);
 
+router.get("/tickets", async (req, res) => {
+	const tickets = await getTicket();
+	res.json({ tickets });
+});
+
 router.get("/:cid", cartById);
+
+router.post("/:cid/purchase", stockVerification, purchaseGenerator);
 
 router.post("/", cartVerification, createCart);
 

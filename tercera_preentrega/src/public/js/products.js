@@ -48,5 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 		.catch((error) => console.log(error));
 
 	let cartLink = document.getElementById("linkToCart");
+  console.log("cartLink", cartId);
 	cartLink.setAttribute("href", `/api/carts/${cartId}`);
 });

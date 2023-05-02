@@ -1,7 +1,14 @@
- <h3>Hola {{userData.first_name}} {{userData.last_name}} tu rol es: {{userData.rol}}</h3>
- <button id="logOut">Cerrar Sesion</button>
- <button class="cartButton"><a id="linkToCart" href="/home">IR AL CARRITO</a> </button>
- 
+<h3>Hola {{userData.first_name}} {{userData.last_name}} tu rol es: {{userData.rol}}</h3>
+{{#unless adminData}}
+    <a class="nav-link" id="linkToCart" aria-current="page" href="#">Carrito</a>
+    <a class="nav-link" href="#">Chat</a>
+{{/unless}}
+
+{{#if adminData}}
+    <a class="nav-link" href="/realtimeproducts">Modificar Productos</a>
+{{/if}}
+<a  class="nav-link" href="/api/sessions/logout">Log Out</a>
+
 <div id="card-render" style="display:flex;flex-wrap: wrap; justify-content: space-around;  row-gap: 20px;">
     <div class="custom-loader"></div>
 </div>
