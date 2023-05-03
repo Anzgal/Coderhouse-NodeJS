@@ -21,7 +21,7 @@ export function productGenerator() {
 		category: faker.commerce.department(),
 		thumbnail: faker.image.technics(800, 800, true),
 	};
-    console.log("Mock generado: ", product);
+    //console.log("Mock generado: ", product);
 	return product;
 }
 export const PRODUCTS = () => {

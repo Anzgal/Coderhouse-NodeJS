@@ -85,6 +85,27 @@ export const addOneProduct = async (req, res) => {
 	}
 };
 
+export const addManyProducts = async (req, res) => {
+	try {
+		const products = req.body;
+		
+		for (const product of products) {
+			const addedProduct = await addProduct(product);
+			console.log(addedProduct);
+			if (addedProduct === 401) {
+				res.status(400).json({ error: "Enter all required fields" });
+			} else if (addedProduct === 402) {
+				res.status(400).json({ error: "The code already exists" });
+			} else {
+				console.log(`Product added succesfully: ${addedProduct}`);
+			}
+		}
+		res.status(200).json({ mensaje: "Products added succesfully" });
+	} catch (error) {
+		console.log("Error:", error);
+	}
+};
+
 export const modifyProduct = async (req, res) => {
 	try {
 		const { pid } = req.params;

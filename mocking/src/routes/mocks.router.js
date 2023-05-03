@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { userGenerator, productGenerator, PRODUCTS } from "../mocks/mocksGenerator.js";
 import passport from "passport";
-import { addOneProduct } from "../controllers/products.controller.js";
+import { addOneProduct, addManyProducts } from "../controllers/products.controller.js";
 const router = Router();
 
 router.post(
@@ -23,15 +23,12 @@ router.post(
 router.post(
 	"/mockingproducts",
 	(req, res, next) => {
-		const product = productGenerator();
-        //const products = PRODUCTS();
-		req.body = product;
+		//const product = productGenerator();
+		const products = PRODUCTS();
+		req.body = products;
 		next();
 	},
-	addOneProduct
+	addManyProducts
 );
-
-
-
 
 export default router;
