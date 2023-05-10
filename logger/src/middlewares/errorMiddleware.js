@@ -6,7 +6,7 @@ export const errorsMiddleware = (error,req,res,next) =>{
         cause:error.cause,
         message:error.message
     })
-    //logger.error(`Method: ${req.method} - URL: ${req.url} - date: ${Date().toString()} - error: ${error.message}`)
+    logger.error(`Method: ${req.method} - URL: ${req.url} - date: ${Date().toString()} - error: ${error.message}`)
 
     next()
 }

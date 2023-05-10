@@ -1,6 +1,6 @@
 import { usersModel } from "../models/user.model.js";
-import { hashPassword } from "../../utils/utils.js";
-import { comparePasswords } from "../../utils/utils.js";
+import { hashPassword } from "../../utils.js";
+import { comparePasswords } from "../../utils.js";
 import CustomError from "../../errors/customError.js";
 import { errors } from "../../errors/errors.dictionary.js";
 
