@@ -6,7 +6,7 @@ import { errors } from "../../errors/errors.dictionary.js";
 
 export default class UserManager {
 	async createUser(userInfo) {
-		const { email, password } = userInfo;
+		const { email, password, first_name, last_name } = userInfo;
 		if (!first_name || !last_name || !email || !password) {
 			CustomError.createError(errors.BadRequest);
 		}
