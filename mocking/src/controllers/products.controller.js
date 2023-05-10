@@ -73,12 +73,11 @@ export const addOneProduct = async (req, res) => {
 		const newProduct = await addProduct(objProduct);
 
 		if (newProduct === 401) {
-			res.status(400).json({ error: "Enter all required fields" });
+			return res.status(400).json({ error: "Enter all required fields" });
 		} else if (newProduct === 402) {
-			res.status(400).json({ error: "The code already exists" });
+			return res.status(400).json({ error: "The code already exists" });
 		} else {
-			res.status(200).json({ mensaje: "Product added succesfully", newProduct });
-			console.log(`Product added succesfully: ${newProduct}`);
+			return res.status(200).json({ mensaje: "Product added succesfully", newProduct });
 		}
 	} catch (error) {
 		console.log("Error:", error);
@@ -88,7 +87,7 @@ export const addOneProduct = async (req, res) => {
 export const addManyProducts = async (req, res) => {
 	try {
 		const products = req.body;
-		
+
 		for (const product of products) {
 			const addedProduct = await addProduct(product);
 			console.log(addedProduct);

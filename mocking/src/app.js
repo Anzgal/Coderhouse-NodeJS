@@ -9,6 +9,7 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 
+
 //ROUTERS
 import cartRouter from "./routes/cart.router.js";
 import viewsRouter from "./routes/views.router.js";
@@ -22,6 +23,8 @@ import testUsers from "./routes/mocks.router.js";
 import ProductManager from "./dao/mongoManager/productsManager.js";
 import MessagesManager from "./dao/mongoManager/messagesManager.js";
 import UserManager from "./dao/mongoManager/userManager.js";
+
+import { errorMiddleware } from './middlewares/errorMiddleware.js'
 
 import "./dao/dbConfig.js";
 import "./passport/passportStrategies.js";
@@ -74,6 +77,7 @@ const hbs = handlebars.create({
 
 app.engine("handlebars", hbs.engine);
 
+app.use(errorMiddleware);
 //SERVER
 const httpServer = app.listen(PORT, () => {
 	console.log(`Escuchando puerto : ${PORT}`);

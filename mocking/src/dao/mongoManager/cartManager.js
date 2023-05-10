@@ -1,4 +1,6 @@
 import { cartModel } from "../models/cart.model.js";
+import { ErrorsCause, ErrorsMessage, ErrorsName } from "../../errors/errorsEnum.js";
+import CustomError from "../../errors/customError.js";
 
 export default class CartManager {
 	async getCarts() {
