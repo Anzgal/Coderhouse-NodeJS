@@ -1,0 +1,60 @@
+{
+  message: 'Method: GET - URL: / - date: Tue May 09 2023 22:08:38 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:08:38.169Z'
+}
+{
+  message: 'Method: POST - URL: /api/sessions/login - date: Tue May 09 2023 22:09:03 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:09:03.403Z'
+}
+{
+  message: 'Method: GET - URL: /loginError - date: Tue May 09 2023 22:09:03 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:09:03.605Z'
+}
+{
+  message: 'Method: GET - URL: / - date: Tue May 09 2023 22:09:13 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:09:13.938Z'
+}
+{
+  message: 'Method: GET - URL: /registro - date: Tue May 09 2023 22:09:28 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:09:28.954Z'
+}
+{
+  message: 'Method: POST - URL: /api/users/registro - date: Tue May 09 2023 22:09:48 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:09:48.520Z'
+}
+{
+  message: 'Method: GET - URL: /api/users/registro - date: Tue May 09 2023 22:12:03 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:12:03.845Z'
+}
+{
+  message: 'Method: POST - URL: /api/users/registro - date: Tue May 09 2023 22:12:08 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:12:08.360Z'
+}
+{
+  message: 'Method: POST - URL: /api/users/registro - date: Tue May 09 2023 22:12:26 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:12:26.689Z'
+}
+{
+  message: 'Method: POST - URL: /api/sessions/login - date: Tue May 09 2023 22:14:25 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:14:25.055Z'
+}
+{
+  message: 'Method: GET - URL: /loginError - date: Tue May 09 2023 22:14:25 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:14:25.233Z'
+}
+{
+  message: 'Method: GET - URL: / - date: Tue May 09 2023 22:14:28 GMT-0500 (Central Daylight Time)',
+  level: 'error',
+  timestamp: '2023-05-10T03:14:28.423Z'
+}

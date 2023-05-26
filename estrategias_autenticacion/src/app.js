@@ -15,12 +15,14 @@ import productsRouter from "./routes/products.router.js";
 import sessionRouter from "./routes/session.router.js";
 import userRouter from "./routes/user.router.js";
 import jwtRouter from "./routes/jwt.router.js";
+import artilleryTest from "./routes/artilleryTest.router.js"
 
 import ProductManager from "./persistencia/dao/productsManager.js";
 import MessagesManager from "./persistencia/dao/messagesManager.js";
 
 import "./persistencia/dbConfig.js";
 import "./passport/passportStrategies.js";
+import compression from "express-compression";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -58,6 +60,8 @@ app.use("/api/products", productsRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/api/users", userRouter);
 app.use("/jwt", jwtRouter);
+app.use("/artilleryTest", artilleryTest);
+
 
 const httpServer = app.listen(PORT, () => {
   console.log(`Escuchando puerto : ${PORT}`);
