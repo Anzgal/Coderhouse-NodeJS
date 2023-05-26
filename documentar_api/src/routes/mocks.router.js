@@ -1,3 +1,19 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Mocks
+ *   description: Mocks endpoints
+ * /mockingproducts:
+ *   post:
+ *     summary: Returns the products
+ *     tags: [Mocks]
+ *     responses:
+ *       200:
+ *         description: The products
+ *         content:
+ *           application/json:
+ */
+
 import { Router } from "express";
 import { userGenerator, productGenerator, PRODUCTS } from "../mocks/mocksGenerator.js";
 import passport from "passport";

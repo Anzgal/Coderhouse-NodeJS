@@ -9,3 +9,10 @@ deleteProductButton.forEach((button) => {
 		location.reload();
 	});
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+	const total = document.getElementById("totalValue");
+	if (total) {
+		total.textContent = totalValue.toFixed(2);
+	}
+});

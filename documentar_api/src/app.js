@@ -8,6 +8,9 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import passport from "passport";
 import cookieParser from "cookie-parser";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUI from "swagger-ui-express";
+
 
 //ROUTERS
 import cartRouter from "./routes/cart.router.js";
@@ -52,6 +55,26 @@ sessionOptions.store = new MongoStore({
 });
 
 app.use(session(sessionOptions));
+
+
+//SWAGGER
+const swaggerOptions = {	
+	swaggerDefinition: {
+		info: {
+			version: "1.0.0",
+			title: "Ecommerce API",
+			description: "Ecommerce API Information",
+			contact: {
+				name: "Martín Anzures",
+			},
+			server: [`http://localhost:${PORT}`],
+		}
+	},
+	basePath: "/apidocs",
+	apis: ["./src/routes/*.js"],
+};
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 //PASSPORT
 app.use(passport.initialize());

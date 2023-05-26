@@ -1,5 +1,5 @@
 import winston, { format } from "winston";
-import { __dirname } from "../../utilities.js";
+import { __dirname } from "../../utils.js";
 import { dictionary } from "../dictionary/stringDictionary.js";
 import dotenv from "dotenv";
 

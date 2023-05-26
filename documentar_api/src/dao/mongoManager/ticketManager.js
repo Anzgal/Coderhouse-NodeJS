@@ -10,4 +10,12 @@ export default class TicketManager {
 		const ticketsData = await ticketModel.find({});
 		return ticketsData;
 	}
+	async deleteAll() {
+		const response = await ticketModel.deleteMany({});
+		return response;
+	}
+	async deleteById(id) {
+		const response = await ticketModel.findByIdAndDelete(id);
+		return response;
+	}
 }

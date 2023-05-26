@@ -15,8 +15,6 @@ function hideSpinner() {
 	spinner.style.display = "none";
 }
 
-//funcion renderizadora de productos:
-
 async function renderProductsList(pageNumber = 1) {
 	showSpinner();
 	const cartCreation = await fetch("/api/carts", {

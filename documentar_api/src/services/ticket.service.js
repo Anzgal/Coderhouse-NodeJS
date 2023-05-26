@@ -26,7 +26,17 @@ export const createATicket = async (ticketData) => {
 	return response;
 };
 
-export const getTicket = async () => {
+export const getTickets = async () => {
 	const response = await ticketsDao.getTickets();
 	return response;
 };
+
+export const deleteTicket = async(id)=>{
+    const response = await ticketsDao.deleteById(id);
+    return response
+}
+
+export const deleteAllTickets = async()=>{
+    const response = await ticketsDao.deleteAll();
+    return response
+}

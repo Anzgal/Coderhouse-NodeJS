@@ -9,7 +9,7 @@ export default class CartManager {
 	}
 
 	async getCartbyId(cId) {
-		if (typeof cId !== "string") {	
+		if (typeof cId !== "string") {
 			CustomError(errors.BadRequest);
 		}
 		const cartFounded = await cartsModel.find({ _id: cId }).lean();
@@ -76,9 +76,12 @@ export default class CartManager {
 		if (typeof cid !== "string" || typeof pid !== "string" || typeof quantity !== "number") {
 			CustomError(errors.BadRequest);
 		}
+		await this.addToCart(cid, pid);
 		const filter = { _id: cid, "products.productId": pid };
 		const update = { $set: { "products.$.quantity": quantity } };
-		const updatedCartProduct = await cartsModel.findOneAndUpdate(filter, update, { new: true });
+		const updatedCartProduct = await cartsModel
+			.findOneAndUpdate(filter, update, { new: true })
+			.lean();
 		return updatedCartProduct;
 	}
 

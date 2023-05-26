@@ -1,10 +1,33 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Cart:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-generated id of the cart
+ *         products:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *           productId:
+ *             type: string
+ *             description: The id of the product
+ *           quantity:
+ *             type: number
+ *             description: The quantity of the product
+ */
+
 import { Router } from "express";
-import { cartVerification } from "../middlewares/cartVerification.middleware.js";
+import { cartVerification } from "../middlewares/cartVerification.js";
 import {
 	cartById,
 	createCart,
 	getAllCarts,
-	addProducToCart,
+	addProductToCart,
 	addArrayToCart,
 	updateByQuery,
 	deleteCById,
@@ -12,7 +35,7 @@ import {
 	deleteAll,
 } from "../controllers/carts.controller.js";
 
-import { stockVerification } from "../middlewares/stockVerification.middleware.js";
+import { stockVerification } from "../middlewares/stockVerification.js";
 import {
 	deleteTicketById,
 	getAllTickets,
@@ -35,7 +58,7 @@ router.post("/:cid/purchase", stockVerification, purchaseGenerator);
 
 router.post("/", cartVerification, createCart);
 
-router.post("/:cid/product/:pid", addProducToCart);
+router.post("/:cid/product/:pid", addProductToCart);
 
 router.put("/:cid", addArrayToCart);
 
